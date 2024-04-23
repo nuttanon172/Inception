@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    build: ./requiresments/nginx
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress-database:/var/www/html
+    networks:
+      - app-net
+    container_name: nginx
+  
+  wordpress:
+    image: wordpress
+    build: ./requiresments/wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress-database:/var/www/html
+    networks:
+      - app-net
+    container_name:  wordpress
+ 
+  mariadb:
+    image: mariadb
+    build: ./requiresments/mariadb
+    volumes:
+      - db-database:/var/lib/my-sql
+    networks:
+      - app-net
+    container_name: mariadb
+
+volumes:
+  db-database:
+    driver: local
+
+  wordpress-database:
+    driver: local
+
+networks:
+  app-net:
+    driver: bridge

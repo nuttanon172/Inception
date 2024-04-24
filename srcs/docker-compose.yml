@@ -8,6 +8,8 @@ services:
       - wordpress
     volumes:
       - wordpress-database:/var/www/html
+    env_file:
+      - .env
     networks:
       - app-net
     container_name: nginx

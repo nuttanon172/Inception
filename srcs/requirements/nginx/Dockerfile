@@ -2,7 +2,7 @@
 FROM debian:bookworm
 
 # Update package lists and install Nginx and OpenSSL
-RUN apt-get update && \
+RUN apt-get update -y && \
     apt-get install -y nginx openssl
 
 # Copy the custom Nginx configuration file and script to the container

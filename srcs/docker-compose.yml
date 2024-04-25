@@ -3,7 +3,7 @@ version: '3'
 services:
   nginx:
     image: nginx
-    build: ./requiresments/nginx
+    build: ./requirements/nginx
     depends_on:
       - wordpress
     volumes:
@@ -13,33 +13,48 @@ services:
     networks:
       - app-net
     container_name: nginx
+    restart: always
   
   wordpress:
     image: wordpress
-    build: ./requiresments/wordpress
+    build: ./requirements/wordpress
     depends_on:
       - mariadb
     volumes:
       - wordpress-database:/var/www/html
+    env_file:
+      - .env
     networks:
       - app-net
     container_name:  wordpress
+    restart: always
  
   mariadb:
     image: mariadb
-    build: ./requiresments/mariadb
+    build: ./requirements/mariadb
     volumes:
-      - db-database:/var/lib/my-sql
+      - maria-database:/var/lib/my-sql
+    env_file:
+      - .env
     networks:
       - app-net
     container_name: mariadb
+    restart: always
 
 volumes:
-  db-database:
+  maria-database:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $HOME/database/maria-db
 
   wordpress-database:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $HOME/database/wordpress-db
 
 networks:
   app-net:

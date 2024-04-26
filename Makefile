@@ -1,11 +1,11 @@
-.PHONY: all up down clean fclean setup
+.PHONY: all up down clean setup re fclean
 all: setup up
 
 up:
-	@docker-compose -f srcs/docker-compose.yml up -d
+	@docker-compose -f srcs/docker-compose.yml up
 
 down:
-	@docker-compose -f srcs/docker-compose.yml down -d
+	@docker-compose -f srcs/docker-compose.yml down
 
 clean:
 	@docker compose -f srcs/docker-compose.yml down --volumes
@@ -14,5 +14,7 @@ setup:
 	@mkdir -p ${HOME}/database/maria-db
 	@mkdir -p ${HOME}/database/wordpress-db
 
+re: clean up
+
 fclean: clean
-	@rm -rf ${HOME}/database
+	@sudo rm -rf ${HOME}/database

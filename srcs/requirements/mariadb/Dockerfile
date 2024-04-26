@@ -3,7 +3,7 @@ FROM debian:bookworm
 
 # Update package lists and install MariaDB
 RUN apt-get update -y && \
-    apt-get install -y mariadb-server
+    apt-get install -y mariadb-server mariadb-client
 
 # Copy the custom MariaDB configuration file and script to the container
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/

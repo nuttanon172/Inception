@@ -23,5 +23,7 @@ EOF
 # Shut down the MariaDB service
 service mariadb stop
 
+chmod -R 777 /var/lib/mysql
+
 # Restart the MariaDB service in the foreground
 exec "$@"

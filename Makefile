@@ -17,4 +17,5 @@ setup:
 re: clean up
 
 fclean: clean
-	@sudo rm -rf ${HOME}/database
+	@sudo rm -rf ${HOME}/database/maria-db
+	@sudo rm -rf ${HOME}/database/wordpress-db

@@ -5,11 +5,11 @@ FROM debian:bookworm
 RUN apt-get update -y && \
 	apt-get install -y php-fpm php-mysql
 
-RUN apt-get install -y curl
+RUN apt-get install -y curl procps
 
 # Copy the custom WordPress configuration file and script to the container
-COPY conf/wp-config.php /
-COPY tools/script.sh /
+COPY /conf/wp-config.php /
+COPY /tools/script.sh /
 
 # Expose port 9000 to allow PHP-FPM (FastCGI Process Manager) to handle PHP requests in WordPress
 EXPOSE 9000

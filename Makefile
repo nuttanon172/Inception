@@ -1,4 +1,4 @@
-.PHONY: all up down clean setup re fclean
+.PHONY: all up down setup re clean iclean
 all: setup up
 
 up:
@@ -14,8 +14,9 @@ setup:
 	@mkdir -p ${HOME}/database/maria-db
 	@mkdir -p ${HOME}/database/wordpress-db
 
-re: clean up
-
 fclean: clean
-	@sudo rm -rf ${HOME}/database/maria-db
-	@sudo rm -rf ${HOME}/database/wordpress-db
+	@rm -rf ${HOME}/database
+
+iclean:
+	@docker rmi `docker images -a -q`
+

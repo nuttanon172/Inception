@@ -9,13 +9,16 @@ RUN apt-get install -y procps
 
 # Copy the custom Nginx configuration file and script to the container
 COPY /conf/default.conf /etc/nginx/conf.d/
+
 COPY /tools/script.sh /usr/local/bin/script
 
 RUN chmod +x /usr/local/bin/script
+
 # Expose the HTTPS port
 EXPOSE 443
 
+# Start Nginx with the custom script when the container starts
 ENTRYPOINT [ "script" ]
 
 # Start Nginx in the foreground without daemon mode
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "nginx", "-g", "daemon off;" ]

@@ -1,8 +1,5 @@
 #!/bin/bash
 
-mkdir -p /var/www/html
-cd /var/www/html
-
 # Install WordPress Command-line interface
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
@@ -10,15 +7,18 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
-sleep 5
+sleep 3
 
 # Download WordPress
 wp core download --allow-root
 
+while true; do
+    chmod -R 777 /var/www/html
+    sleep 1
+done &
+
 mv wp-config-sample.php wp-config.php
 mv /wp-config.php /var/www/html/
-
-chmod -R 777 /var/www/html
 
 wp config set DB_NAME "$MYSQL_NAME" --type=constant --allow-root
 wp config set DB_USER "$MYSQL_USER" --type=constant --allow-root
@@ -36,5 +36,4 @@ wp user create $WP_USERNAME $WP_USERNAME_EMAIL --role=author \
 # Modify the PHP-FPM configuration to listen on port 9000 for incoming requests
 sed -i 's/listen = \/run\/php\/php8.2-fpm.sock/listen = 0.0.0.0:9000/g' /etc/php/8.2/fpm/pool.d/www.conf
 
-# Start the PHP-FPM service for PHP version 8.2 in the foreground
-/usr/sbin/php-fpm8.2 -F
+exec "$@"

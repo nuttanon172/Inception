@@ -49,14 +49,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: $HOME/database/maria-db
+      device: $HOME/data/maria-db
 
   wordpress-database:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: $HOME/database/wordpress-db
+      device: $HOME/data/wordpress-db
 
 networks:
   app-net:

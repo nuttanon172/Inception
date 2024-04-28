@@ -11,11 +11,11 @@ clean:
 	@docker compose -f srcs/docker-compose.yml down --volumes
 
 setup:
-	@mkdir -p ${HOME}/database/maria-db
-	@mkdir -p ${HOME}/database/wordpress-db
+	@mkdir -p ${HOME}/data/maria-db
+	@mkdir -p ${HOME}/data/wordpress-db
 
 fclean: clean
-	@rm -rf ${HOME}/database
+	@rm -rf ${HOME}/data
 
 iclean:
 	@docker rmi `docker images -a -q`

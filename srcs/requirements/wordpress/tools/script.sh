@@ -12,10 +12,7 @@ sleep 3
 # Download WordPress
 wp core download --allow-root
 
-while true; do
-    chmod -R 777 /var/www/html
-    sleep 1
-done &
+chmod -R 777 /var/www/html
 
 mv wp-config-sample.php wp-config.php
 mv /wp-config.php /var/www/html/

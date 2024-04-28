@@ -20,10 +20,7 @@ mariadb <<EOF
     FLUSH PRIVILEGES;
 EOF
 
-while true; do
-    chmod -R 777 /var/lib/mysql
-    sleep 1
-done &
+chmod -R 777 /var/lib/mysql
 
 # Shut down the MariaDB service
 service mariadb stop

@@ -1,4 +1,4 @@
-.PHONY: all up down setup re clean iclean
+.PHONY: all up down setup clean iclean
 all: setup up
 
 up:
@@ -7,16 +7,15 @@ up:
 down:
 	@docker-compose -f srcs/docker-compose.yml down
 
-clean:
-	@docker compose -f srcs/docker-compose.yml down --volumes
-
 setup:
 	@mkdir -p ${HOME}/data/maria-db
 	@mkdir -p ${HOME}/data/wordpress-db
+
+clean:
+	@docker compose -f srcs/docker-compose.yml down --volumes
 
 fclean: clean
 	@rm -rf ${HOME}/data
 
 iclean:
 	@docker rmi `docker images -a -q`
-

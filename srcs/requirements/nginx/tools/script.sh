@@ -19,7 +19,7 @@ echo "server {
     root /var/www/html;
     index index.php;
     error_log /var/log/nginx/error.log;
-    access_log /var/log/nginx/access.log;" > /etc/nginx/conf.d/default.conf
+    access_log /var/log/nginx/access.log;" > /etc/nginx/conf.d/nginx.conf
 
 echo '
     location ~ \.php$ {
@@ -28,6 +28,6 @@ echo '
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
-}' >> /etc/nginx/conf.d/default.conf
+}' >> /etc/nginx/conf.d/nginx.conf
 
 exec "$@"

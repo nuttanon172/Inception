@@ -1,5 +1,5 @@
-# Use the Debian Bookworm base image
-FROM debian:bookworm
+# Use the Debian bookworm-slim base image
+FROM debian:bookworm-slim
 
 # Update package lists and install MariaDB
 RUN apt-get update && \
